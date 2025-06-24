@@ -1,0 +1,185 @@
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: my-nifi-secret-reader
+  namespace: nifi
+automountServiceAccountToken: false
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-nifi-secret-reader-token
+  namespace: nifi
+  annotations:
+    kubernetes.io/service-account.name: my-nifi-secret-reader
+type: kubernetes.io/service-account-token
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: my-nifi-secret-reader
+  namespace: nifi
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get"]
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: my-nifi-secret-reader
+  namespace: nifi
+subjects:
+- kind: ServiceAccount
+  name: my-nifi-secret-reader
+roleRef:
+  kind: Role
+  name: my-nifi-secret-reader
+  apiGroup: rbac.authorization.k8s.io
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-nifi-ca
+  namespace: nifi
+spec:
+  isCA: true
+  duration: 87660h
+  renewBefore: 5m1s
+  commonName: my-nifi-ca.nifi.svc.cluster.local
+  subject:
+    organizationalUnits:
+    - NIFI
+  secretName: my-nifi-ca
+  privateKey:
+    algorithm: RSA
+    size: 2048
+    rotationPolicy: Always
+  issuerRef:
+    name: my-nifi
+    kind: Issuer
+    group: cert-manager.io
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-nifi-0
+  namespace: nifi
+spec:
+  duration: 2160h
+  commonName: my-nifi-0.my-nifi-headless.nifi.svc.cluster.local
+  subject:
+    organizationalUnits:
+    - NIFI
+  secretName: my-nifi-0
+  privateKey:
+    rotationPolicy: Always
+  usages:
+    - digital signature
+    - content commitment
+    - key encipherment
+    - data encipherment
+    - key agreement
+    - server auth
+    - client auth
+  dnsNames:
+    - localhost
+    - my-nifi.nifi.svc
+    - my-nifi.nifi.svc.cluster.local
+    - my-nifi-0.my-nifi-headless.nifi.svc
+    - my-nifi-0.my-nifi-headless.nifi.svc.cluster.local
+  issuerRef:
+    name: my-nifi-ca
+    kind: Issuer
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-nifi-1
+  namespace: nifi
+spec:
+  duration: 2160h
+  commonName: my-nifi-1.my-nifi-headless.nifi.svc.cluster.local
+  subject:
+    organizationalUnits:
+    - NIFI
+  secretName: my-nifi-1
+  privateKey:
+    rotationPolicy: Always
+  usages:
+    - digital signature
+    - content commitment
+    - key encipherment
+    - data encipherment
+    - key agreement
+    - server auth
+    - client auth
+  dnsNames:
+    - localhost
+    - my-nifi.nifi.svc
+    - my-nifi.nifi.svc.cluster.local
+    - my-nifi-1.my-nifi-headless.nifi.svc
+    - my-nifi-1.my-nifi-headless.nifi.svc.cluster.local
+  issuerRef:
+    name: my-nifi-ca
+    kind: Issuer
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: my-nifi-2
+  namespace: nifi
+spec:
+  duration: 2160h
+  commonName: my-nifi-2.my-nifi-headless.nifi.svc.cluster.local
+  subject:
+    organizationalUnits:
+    - NIFI
+  secretName: my-nifi-2
+  privateKey:
+    rotationPolicy: Always
+  usages:
+    - digital signature
+    - content commitment
+    - key encipherment
+    - data encipherment
+    - key agreement
+    - server auth
+    - client auth
+  dnsNames:
+    - localhost
+    - my-nifi.nifi.svc
+    - my-nifi.nifi.svc.cluster.local
+    - my-nifi-2.my-nifi-headless.nifi.svc
+    - my-nifi-2.my-nifi-headless.nifi.svc.cluster.local
+  issuerRef:
+    name: my-nifi-ca
+    kind: Issuer
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: my-nifi
+  namespace: nifi
+spec:
+  selfSigned: {}
+---
+# Source: nifi/templates/cert-manager.yaml
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: my-nifi-ca
+  namespace: nifi
+spec:
+  ca:
+    secretName: my-nifi-ca
