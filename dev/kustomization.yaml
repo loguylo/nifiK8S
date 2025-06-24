@@ -1,0 +1,9 @@
+resources:
+  - nifi/cert-manager.yaml
+  - nifi/configmap.yaml
+  - nifi/service.yaml
+  - nifi/statefulset.yaml
+  - zookeeper/scripts-configmap.yaml
+  - zookeeper/statefulset.yaml
+  - zookeeper/svc-headless.yaml
+  - zookeeper/svc.yaml
