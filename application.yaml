@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/loguylo/nifiK8S.git
     targetRevision: HEAD
-    path: charts/nifi-chart
+    path: dev
 
   destination:
     server: https://kubernetes.default.svc
