@@ -11,12 +11,6 @@ spec:
     targetRevision: HEAD
     path: charts/nifi-chart
 
-    helm:
-      values: |
-        replicaCount: 1
-        nifi:
-          image:
-            tag: "latest"
   destination:
     server: https://kubernetes.default.svc
     namespace: nifi
