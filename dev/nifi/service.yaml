@@ -1,13 +1,12 @@
 ---
-# Source: nifi/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-nifi-headless
+  name: nifi-headless
   labels:
     app: "nifi"
     chart: "nifi-1.2.1"
-    release: "my-nifi"
+    release: "nifi"
     heritage: "Helm"
   annotations:
     service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
@@ -15,25 +14,24 @@ spec:
   type: ClusterIP
   clusterIP: None
   ports:
-  - port: 8443
-    name: https
-  - port: 6007
-    name: cluster
-  - port: 10000
-    name: site-to-site
+    - port: 8443
+      name: https
+    - port: 6007
+      name: cluster
+    - port: 10000
+      name: site-to-site
   selector:
     app: "nifi"
-    release: "my-nifi"
+    release: "nifi"
 ---
-# Source: nifi/templates/service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-nifi
+  name: nifi
   labels:
     app: "nifi"
     chart: "nifi-1.2.1"
-    release: "my-nifi"
+    release: "nifi"
     heritage: "Helm"
 spec:
   type: ClusterIP
@@ -41,10 +39,10 @@ spec:
     - port: 8443
       name: https
       targetPort: 8443
-      nodePort: 
+      nodePort:
     - port: 10000
       name: site-to-site
       targetPort: 10000
   selector:
     app: nifi
-    release: my-nifi
+    release: nifi

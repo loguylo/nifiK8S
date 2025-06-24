@@ -1,14 +1,12 @@
----
-# Source: nifi/charts/zookeeper/templates/scripts-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: my-nifi-zookeeper-scripts
+  name: nifi-zookeeper-scripts
   namespace: nifi
   labels:
     app.kubernetes.io/name: zookeeper
     helm.sh/chart: zookeeper-9.2.7
-    app.kubernetes.io/instance: my-nifi
+    app.kubernetes.io/instance: nifi
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: zookeeper
 data:
