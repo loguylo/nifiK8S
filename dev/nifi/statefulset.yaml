@@ -10,7 +10,7 @@ metadata:
 spec:
   podManagementPolicy: Parallel
   serviceName: nifi-headless
-  replicas: 4
+  replicas: 3
   selector:
     matchLabels:
       app: nifi

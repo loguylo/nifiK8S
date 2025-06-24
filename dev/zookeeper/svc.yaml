@@ -16,7 +16,6 @@ spec:
     - name: tcp-client
       port: 2181
       targetPort: client
-      nodePort: null
     - name: tcp-follower
       port: 2888
       targetPort: follower
