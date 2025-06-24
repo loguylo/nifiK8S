@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: myapp-argo-application
+  name: nifi
   namespace: argocd
 spec:
   project: default
@@ -9,10 +9,17 @@ spec:
   source:
     repoURL: https://github.com/loguylo/nifiK8S.git
     targetRevision: HEAD
-    path: dev
+    path: charts/nifi-chart
+
+    helm:
+      values: |
+        replicaCount: 1
+        nifi:
+          image:
+            tag: "latest"
   destination:
     server: https://kubernetes.default.svc
-    namespace: myapp
+    namespace: nifi
 
   syncPolicy:
     syncOptions:
