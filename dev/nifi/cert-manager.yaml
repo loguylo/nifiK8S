@@ -45,7 +45,7 @@ metadata:
   namespace: nifi
 spec:
   isCA: true
-  duration: 87660h
+  duration: 87660h0m0s
   renewBefore: 5m1s
   commonName: nifi-ca.nifi.svc.cluster.local
   subject:
