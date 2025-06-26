@@ -67,7 +67,7 @@ metadata:
   name: nifi-0
   namespace: nifi
 spec:
-  duration: 2160h
+  duration: 2160h0m0s
   commonName: nifi-0.nifi-headless.nifi.svc.cluster.local
   subject:
     organizationalUnits:
@@ -99,7 +99,7 @@ metadata:
   name: nifi-1
   namespace: nifi
 spec:
-  duration: 2160h
+  duration: 2160h0m0s
   commonName: nifi-1.nifi-headless.nifi.svc.cluster.local
   subject:
     organizationalUnits:
@@ -131,7 +131,7 @@ metadata:
   name: nifi-2
   namespace: nifi
 spec:
-  duration: 2160h
+  duration: 2160h0m0s
   commonName: nifi-2.nifi-headless.nifi.svc.cluster.local
   subject:
     organizationalUnits:
