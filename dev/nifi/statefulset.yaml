@@ -262,24 +262,6 @@ spec:
             periodSeconds: 20
             tcpSocket:
               port: 8443
-          #           exec:
-          #             command:
-          #             - bash
-          #             - -c
-          #             - |
-          #
-          #               curl -kv \
-          #                 --cert ${NIFI_HOME}/config-data/certs/admin/crt.pem --cert-type PEM \
-          #                 --key ${NIFI_HOME}/config-data/certs/admin/key.pem --key-type PEM \
-          #                 https://$(hostname -f):8443/nifi-api/controller/cluster > $NIFI_BASE_DIR/data/cluster.state
-          #
-          #               STATUS=$(jq -r ".cluster.nodes[] | select((.address==\"$(hostname -f)\") or .address==\"localhost\") | .status" $NIFI_BASE_DIR/data/cluster.state)
-
-          #               if [[ ! $STATUS = "CONNECTED" ]]; then
-          #                 echo "Node not found with CONNECTED state. Full cluster state:"
-          #                 jq . $NIFI_BASE_DIR/data/cluster.state
-          #                 exit 1
-          #               fi
           livenessProbe:
             initialDelaySeconds: 90
             periodSeconds: 60
@@ -309,15 +291,9 @@ spec:
             - name: "authorizers-temp"
               mountPath: /opt/nifi/nifi-current/conf/authorizers.temp
               subPath: "authorizers.temp"
-            - name: "login-identity-providers-ldap-xml"
-              mountPath: /opt/nifi/nifi-current/conf/login-identity-providers-ldap.xml
-              subPath: "login-identity-providers-ldap.xml"
             - name: "state-management-xml"
               mountPath: /opt/nifi/nifi-current/conf/state-management.xml
               subPath: "state-management.xml"
-            - name: "flow-content"
-              mountPath: /opt/nifi/data/flow.xml
-              subPath: "flow.xml"
             - name: "tls"
               mountPath: /opt/nifi/nifi-current/tls
               readOnly: true
@@ -486,24 +462,12 @@ spec:
             items:
               - key: "authorizers.xml"
                 path: "authorizers.temp"
-        - name: "login-identity-providers-ldap-xml"
-          configMap:
-            name: nifi-config
-            items:
-              - key: "login-identity-providers-ldap.xml"
-                path: "login-identity-providers-ldap.xml"
         - name: "state-management-xml"
           configMap:
             name: nifi-config
             items:
               - key: "state-management.xml"
                 path: "state-management.xml"
-        - name: "flow-content"
-          configMap:
-            name: nifi-config
-            items:
-              - key: "flow.xml"
-                path: "flow.xml"
         - name: secret-reader-token
           secret:
             secretName: nifi-secret-reader-token
