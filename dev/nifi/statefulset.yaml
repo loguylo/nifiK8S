@@ -58,7 +58,7 @@ spec:
       containers:
         - name: server
           imagePullPolicy: "IfNotPresent"
-          image: "apache/nifi:1.23.2"
+          image: "apache/nifi:1.27.0"
           command:
             - bash
             - -ce
@@ -350,7 +350,7 @@ spec:
               name: "logs"
         - name: cert-manager
           imagePullPolicy: "IfNotPresent"
-          image: "apache/nifi:1.23.2"
+          image: "apache/nifi:1.27.0"
           command:
             - bash
             - -ce
