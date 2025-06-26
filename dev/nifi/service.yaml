@@ -39,7 +39,6 @@ spec:
     - port: 8443
       name: https
       targetPort: 8443
-      nodePort:
     - port: 10000
       name: site-to-site
       targetPort: 10000

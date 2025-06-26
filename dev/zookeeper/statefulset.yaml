@@ -24,7 +24,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      annotations:
       labels:
         app.kubernetes.io/name: zookeeper
         helm.sh/chart: zookeeper-9.2.7
@@ -35,8 +34,6 @@ spec:
       serviceAccountName: default
 
       affinity:
-        podAffinity:
-
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - podAffinityTerm:
@@ -49,11 +46,9 @@ spec:
                   - "nifi"
                 topologyKey: kubernetes.io/hostname
               weight: 1
-        nodeAffinity:
 
       securityContext:
         fsGroup: 1001
-      initContainers:
       containers:
         - name: zookeeper
           image: docker.io/bitnami/zookeeper:3.8.0-debian-11-r5
@@ -159,7 +154,6 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: data
-        annotations:
       spec:
         accessModes:
           - "ReadWriteOnce"
