@@ -3,7 +3,7 @@ resources:
   - nifi/configmap.yaml
   - nifi/service.yaml
   - nifi/statefulset.yaml
-  - zookeeper/scripts-configmap.yaml
+  - zookeeper/configmap.yaml
   - zookeeper/statefulset.yaml
-  - zookeeper/svc-headless.yaml
-  - zookeeper/svc.yaml
+  - zookeeper/service-headless.yaml
+  - zookeeper/service.yaml
