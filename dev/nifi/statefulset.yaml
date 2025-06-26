@@ -477,13 +477,39 @@ spec:
           emptyDir: {}
         - name: auth-conf
           emptyDir: {}
-        - name: data
-          emptyDir: {}
-        - name: flowfile-repository
-          emptyDir: {}
-        - name: content-repository
-          emptyDir: {}
-        - name: provenance-repository
-          emptyDir: {}
-        - name: logs
-          emptyDir: {}
+      volumeClaimTemplates:
+        - metadata:
+            name: data
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
+        - metadata:
+            name: flowfile-repository
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 5Gi
+        - metadata:
+            name: content-repository
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 10Gi
+        - metadata:
+            name: provenance-repository
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 5Gi
+        - metadata:
+            name: logs
+          spec:
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 1Gi
